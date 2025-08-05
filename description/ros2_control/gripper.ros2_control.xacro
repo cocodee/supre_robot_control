@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 <xacro:macro name="gripper_system" params="name prefix use_mock_hardware:=^|true param_device:=/dev/ttyTHS1 param_slave_id:=10 param_baud_rate:=115200 param_max_stroke:=0.04">
     <ros2_control name="${name}" type="system">
         <hardware>
@@ -21,3 +22,4 @@
         </joint>
     </ros2_control>
 </xacro:macro>
+</robot>
