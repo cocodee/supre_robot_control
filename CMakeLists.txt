@@ -71,7 +71,7 @@ pluginlib_export_plugin_description_file(hardware_interface supre_robot_control.
 
 # INSTALL
 install(
-  DIRECTORY hardware/include/
+  DIRECTORY hardware/include/ third_party/include
   DESTINATION include/supre_robot_control
 )
 install(
