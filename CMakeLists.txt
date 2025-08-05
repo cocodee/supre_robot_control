@@ -50,11 +50,15 @@ $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/hardware/include>
 $<INSTALL_INTERFACE:include/supre_robot_control>
 ${MODBUS_INCLUDE_DIRS}
 )
-target_link_libraries(supre_robot_control PUBLIC
+
+ament_target_dependencies(supre_robot_contol PUBLIC 
   hardware_interface
   pluginlib
   rclcpp
   rclcpp_lifecycle
+)
+
+target_link_libraries(supre_robot_control PUBLIC
   ${MISUMI_GRIPPER_LIBRARY} 
   ${EUMOTOR_LIBRARY}
   ${MODBUS_LIBRARIES} 
