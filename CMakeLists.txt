@@ -32,13 +32,13 @@ add_library(
 )
 find_library(MISUMI_GRIPPER_LIBRARY
  NAMES misumi_gripper_lib
- PATHS $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/third_party/lib
+ PATHS $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/third_party/lib>
  REQUIRED
 )
 
 find_library(EUMOTOR_LIBRARY
   NAMES eu_motor  # CMake automatically adds 'lib' prefix and '.so' suffix
-  PATHS $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/third_party/lib
+  PATHS $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/third_party/lib>
 )
 
 pkg_check_modules(MODBUS REQUIRED libmodbus)
