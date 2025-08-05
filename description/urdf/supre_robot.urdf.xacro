@@ -1,4 +1,4 @@
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="2dof_robot">
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="supre_robot">
 
   <!-- Enable setting arguments from the launch file -->
   <xacro:arg name="use_mock_hardware" default="false" />
@@ -11,10 +11,10 @@
   <xacro:arg name="param_max_stroke" default=0.04 />
 
   <!-- Import joints ros2_control description -->
-  <xacro:include filename="$(find supre_robot_control)/description/ros2_control/joints.ros2_control.xacro" />
+  <xacro:include filename="$(find supre_robot_control)/ros2_control/joints.ros2_control.xacro" />
 
   <!-- Import gripper description -->
-  <xacro:include filename="$(find supre_robot_control)/description/ros2_control/gripper.ros2_control.xacro" />
+  <xacro:include filename="$(find supre_robot_control)/ros2_control/gripper.ros2_control.xacro" />
 
   <xacro:gripper_system
     name="MisumiGripper" prefix="$(arg prefix)"
