@@ -22,7 +22,7 @@ def generate_launch_description():
     )
 
     # Get URDF file path
-    urdf_file = os.path.join(pkg_share,'urdf' 'supre_robot.urdf.xacro')
+    urdf_file = os.path.join(pkg_share,'urdf','supre_robot.urdf.xacro')
     robot_description_content = Command(['xacro ', urdf_file])
     robot_description = {"robot_description": robot_description_content}
 
