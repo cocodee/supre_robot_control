@@ -35,7 +35,7 @@ right_arm_controller:
       - right_arm_joint_7
     interface_name: "position"
 
-/misumi_gripper_controller:
+misumi_gripper_controller:
   ros__parameters:
     type: forward_command_controller/ForwardCommandController
     joints: 
