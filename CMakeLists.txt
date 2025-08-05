@@ -12,7 +12,7 @@ set(THIS_PACKAGE_INCLUDE_DEPENDS
   rclcpp
   rclcpp_lifecycle
   ros2_control
-  ros2_controls
+  ros2_controllers
   rclcp
   xacro
 )
