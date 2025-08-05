@@ -10,6 +10,7 @@
   <xacro:arg name="param_baud_rate" default="115200" />
   <xacro:arg name="param_max_stroke" default="0.04" />
 
+  <xacro:include filename="$(find supre_robot_control)/urdf/supre_robot_description.urdf.xacro" />
   <!-- Import joints ros2_control description -->
   <xacro:include filename="$(find supre_robot_control)/ros2_control/joints.ros2_control.xacro" />
 
