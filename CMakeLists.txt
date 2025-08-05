@@ -51,10 +51,10 @@ $<INSTALL_INTERFACE:include/supre_robot_control>
 ${MODBUS_INCLUDE_DIRS}
 )
 target_link_libraries(supre_robot_control PUBLIC
-  hardware_interface::hardware_interface
-  pluginlib::pluginlib
-  rclcpp::rclcpp
-  rclcpp_lifecycle::rclcpp_lifecycle
+  hardware_interface
+  pluginlib
+  rclcpp
+  rclcpp_lifecycle
   ${MISUMI_GRIPPER_LIBRARY} 
   ${EUMOTOR_LIBRARY}
   ${MODBUS_LIBRARIES} 
