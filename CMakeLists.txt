@@ -47,6 +47,7 @@ pkg_check_modules(MODBUS REQUIRED libmodbus)
 target_compile_features(supre_robot_control PUBLIC cxx_std_17)
 target_include_directories(supre_robot_control PUBLIC
 $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/hardware/include>
+$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/third_party/include>
 $<INSTALL_INTERFACE:include/supre_robot_control>
 ${MODBUS_INCLUDE_DIRS}
 )
