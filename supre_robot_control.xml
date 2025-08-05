@@ -1,6 +1,6 @@
 <library path="supre_robot_control">
   <class name="supre_robot_control/MisumiGripperHardware"
-         type="supre_robot_control/MisumiGripperHardware"
+         type="supre_robot_control::MisumiGripperHardware"
          base_class_type="hardware_interface::SensorInterface">
     <description>
       The ros2_control gripper example using a system hardware interface-type.
