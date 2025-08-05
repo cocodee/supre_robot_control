@@ -51,7 +51,7 @@ $<INSTALL_INTERFACE:include/supre_robot_control>
 ${MODBUS_INCLUDE_DIRS}
 )
 
-ament_target_dependencies(supre_robot_contol
+ament_target_dependencies(supre_robot_control
   PUBLIC 
   hardware_interface
   pluginlib
