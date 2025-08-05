@@ -22,12 +22,12 @@ def generate_launch_description():
     )
 
     # Get URDF file path
-    urdf_file = os.path.join(pkg_share, 'description','urdf' 'supre_robot.urdf.xacro')
+    urdf_file = os.path.join(pkg_share,'urdf' 'supre_robot.urdf.xacro')
     robot_description_content = Command(['xacro ', urdf_file])
     robot_description = {"robot_description": robot_description_content}
 
     # Get controller config file path
-    controllers_file = os.path.join(pkg_share, 'bringup','config', 'supre_robot_controllers.yaml')
+    controllers_file = os.path.join(pkg_share,'config', 'supre_robot_controllers.yaml')
 
     # Robot state publisher node
     robot_state_publisher_node = Node(
