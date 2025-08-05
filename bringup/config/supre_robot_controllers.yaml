@@ -37,7 +37,7 @@ right_arm_controller:
 
 /misumi_gripper_controller:
   ros__parameters:
-    type: 
+    type: forward_command_controller/ForwardCommandController
     joints: 
       - gripper_joint # Must match the joint name in the URDF
     interface_name: position
