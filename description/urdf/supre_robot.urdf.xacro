@@ -3,12 +3,12 @@
   <!-- Enable setting arguments from the launch file -->
   <xacro:arg name="use_mock_hardware" default="false" />
   <xacro:arg name="prefix" default="" />
-  <xacro:arg name="param_can_device_index" default=0 />
-  <xacro:arg name="param_can_baud_rate" default=1000 />
+  <xacro:arg name="param_can_device_index" default="0" />
+  <xacro:arg name="param_can_baud_rate" default="1000" />
   <xacro:arg name="param_device" default="/dev/ttyTHS1" />
-  <xacro:arg name="param_slave_id" default=10 />
-  <xacro:arg name="param_baud_rate" default=115200 />
-  <xacro:arg name="param_max_stroke" default=0.04 />
+  <xacro:arg name="param_slave_id" default="10" />
+  <xacro:arg name="param_baud_rate" default="115200" />
+  <xacro:arg name="param_max_stroke" default="0.04" />
 
   <!-- Import joints ros2_control description -->
   <xacro:include filename="$(find supre_robot_control)/ros2_control/joints.ros2_control.xacro" />
