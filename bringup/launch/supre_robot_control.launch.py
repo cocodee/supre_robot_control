@@ -128,8 +128,8 @@ def generate_launch_description():
             controller_manager_node,
             #delay_spawners_after_controller_manager,
             joint_state_broadcaster_spawner,
-            #left_arm_controller_spawner,
+            left_arm_controller_spawner,
             right_arm_controller_spawner,
-            #gripper_controller_spawner,
+            gripper_controller_spawner,
         ]
     )
