@@ -58,6 +58,7 @@ def generate_launch_description():
     controller_manager_name = PathJoinSubstitution(
         ['/', namespace, 'controller_manager']
     )
+
     # Joint state broadcaster
     joint_state_broadcaster_spawner = Node(
         package="controller_manager",
@@ -102,25 +103,29 @@ def generate_launch_description():
     #)
 
     # Delay start of spawners until controller_manager is running
-    delay_spawners_after_controller_manager = RegisterEventHandler(
-        event_handler= OnProcessStart(
-            target_action=controller_manager_node,
-            on_start=[
-                joint_state_broadcaster_spawner,
-                left_arm_controller_spawner,
-                right_arm_controller_spawner,
-                gripper_controller_spawner,
-                #left_gripper_controller_spawner,
-                #right_gripper_controller_spawner,
-            ],
-        )
-    )
+    #delay_spawners_after_controller_manager = RegisterEventHandler(
+    #    event_handler= OnProcessStart(
+    #        target_action=controller_manager_node,
+    #        on_start=[
+    #            joint_state_broadcaster_spawner,
+    #            left_arm_controller_spawner,
+    #            right_arm_controller_spawner,
+    #            gripper_controller_spawner,
+    #            #left_gripper_controller_spawner,
+    #            #right_gripper_controller_spawner,
+    #        ],
+    #    )
+    #)
 
     return LaunchDescription(
         declared_arguments +
         [
             robot_state_publisher_node,
             controller_manager_node,
-            delay_spawners_after_controller_manager,
+            #delay_spawners_after_controller_manager,
+            joint_state_broadcaster_spawner,
+            left_arm_controller_spawner,
+            right_arm_controller_spawner,
+            gripper_controller_spawner,
         ]
     )
