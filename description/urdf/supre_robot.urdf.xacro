@@ -21,7 +21,7 @@
   </xacro:supre_robot>
 
   <xacro:gripper_system
-    name="MisumiGripper" prefix="$(arg prefix)"
+    name="MisumiGripper" prefix="leader_"
     use_mock_hardware="$(arg use_mock_hardware)"
     param_device="$(arg param_device)"
     param_slave_id="$(arg param_slave_id)"
@@ -29,7 +29,7 @@
     param_max_stroke="$(arg param_max_stroke)" />
 
   <xacro:joints_system
-    name="EyouSystem" prefix="$(arg prefix)"
+    name="EyouSystem" prefix="leader_"
     use_mock_hardware="$(arg use_mock_hardware)"
     param_can_device_index="$(arg param_can_device_index)" 
     param_can_baud_rate="$(arg param_can_baud_rate)" />

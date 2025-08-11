@@ -15,6 +15,14 @@ def generate_launch_description():
     declared_arguments = []
     declared_arguments.append(
         DeclareLaunchArgument(
+            "namespace",
+            default_value="supre_robot_leader",
+            description="robot namespace",
+        )
+    )
+
+    declared_arguments.append(
+        DeclareLaunchArgument(
             "use_sim_time",
             default_value="false",
             description="Use simulation (Gazebo) clock if true",
@@ -28,13 +36,14 @@ def generate_launch_description():
 
     # Get controller config file path
     controllers_file = os.path.join(pkg_share,'config', 'supre_robot_controllers.yaml')
-
+    namespace = LaunchConfiguration("namespace")
     # Robot state publisher node
     robot_state_publisher_node = Node(
         package="robot_state_publisher",
         executable="robot_state_publisher",
         output="both",
         parameters=[robot_description],
+        namespace=namespace,
     )
 
     # Controller manager node
@@ -43,34 +52,38 @@ def generate_launch_description():
         executable="ros2_control_node",
         parameters=[robot_description, controllers_file],
         output="screen",
+        namespace=namespace,
     )
 
+    controller_manager_name = PathJoinSubstitution(
+        ['/', namespace, 'controller_manager']
+    )
     # Joint state broadcaster
     joint_state_broadcaster_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["joint_state_broadcaster", "--controller-manager", "/controller_manager"],
+        arguments=["joint_state_broadcaster", "--controller-manager", controller_manager_name],
     )
 
     # Left arm controller spawner
     left_arm_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["left_arm_controller", "--controller-manager", "/controller_manager"],
+        arguments=["left_arm_controller", "--controller-manager", controller_manager_name],
     )
 
     # Right arm controller spawner
     right_arm_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["right_arm_controller", "--controller-manager", "/controller_manager"],
+        arguments=["right_arm_controller", "--controller-manager", controller_manager_name],
     )
 
     # Spawner for the main gripper controller
     gripper_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["misumi_gripper_controller", "--controller-manager", "/controller_manager"],
+        arguments=["misumi_gripper_controller", "--controller-manager", controller_manager_name],
         output="screen",
     )    
 
@@ -78,14 +91,14 @@ def generate_launch_description():
     #left_gripper_controller_spawner = Node(
     #    package="controller_manager",
     #    executable="spawner",
-    #    arguments=["left_gripper_controller", "--controller-manager", "/controller_manager"],
+    #    arguments=["left_gripper_controller", "--controller-manager", controller_manager_name],
     #)
 
     # Right gripper controller spawner
     #right_gripper_controller_spawner = Node(
     #    package="controller_manager",
     #    executable="spawner",
-    #    arguments=["right_gripper_controller", "--controller-manager", "/controller_manager"],
+    #    arguments=["right_gripper_controller", "--controller-manager", controller_manager_name],
     #)
 
     # Delay start of spawners until controller_manager is running
