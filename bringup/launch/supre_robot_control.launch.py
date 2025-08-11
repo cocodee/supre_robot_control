@@ -63,28 +63,28 @@ def generate_launch_description():
     joint_state_broadcaster_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["joint_state_broadcaster", "--controller-manager", controller_manager_name],
+        arguments=["joint_state_broadcaster", "--controller-manager", controller_manager_name,"--autostart"],
     )
 
     # Left arm controller spawner
     left_arm_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["left_arm_controller", "--controller-manager", controller_manager_name],
+        arguments=["left_arm_controller", "--controller-manager", controller_manager_name,"--autostart"],
     )
 
     # Right arm controller spawner
     right_arm_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["right_arm_controller", "--controller-manager", controller_manager_name],
+        arguments=["right_arm_controller", "--controller-manager", controller_manager_name,"--autostart"],
     )
 
     # Spawner for the main gripper controller
     gripper_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["misumi_gripper_controller", "--controller-manager", controller_manager_name],
+        arguments=["misumi_gripper_controller", "--controller-manager", controller_manager_name,"--autostart"],
         output="screen",
     )    
 
