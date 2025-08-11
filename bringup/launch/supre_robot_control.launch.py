@@ -64,6 +64,7 @@ def generate_launch_description():
         package="controller_manager",
         executable="spawner",
         arguments=["joint_state_broadcaster", "--controller-manager", controller_manager_name,"--autostart"],
+        namespace=namespace,
     )
 
     # Left arm controller spawner
@@ -71,6 +72,7 @@ def generate_launch_description():
         package="controller_manager",
         executable="spawner",
         arguments=["left_arm_controller", "--controller-manager", controller_manager_name,"--autostart"],
+        namespace=namespace,
     )
 
     # Right arm controller spawner
@@ -78,6 +80,7 @@ def generate_launch_description():
         package="controller_manager",
         executable="spawner",
         arguments=["right_arm_controller", "--controller-manager", controller_manager_name,"--autostart"],
+        namespace=namespace,
     )
 
     # Spawner for the main gripper controller
@@ -86,6 +89,7 @@ def generate_launch_description():
         executable="spawner",
         arguments=["misumi_gripper_controller", "--controller-manager", controller_manager_name,"--autostart"],
         output="screen",
+        namespace=namespace,
     )    
 
     # Left gripper controller spawner
