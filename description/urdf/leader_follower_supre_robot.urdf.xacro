@@ -25,7 +25,7 @@
   <!-- Import gripper description -->
   <xacro:include filename="$(find supre_robot_control)/ros2_control/gripper.ros2_control.xacro"/>
 
-  <link name="${prefix}world"/>
+  <link name="world"/>
 
   <xacro:create_robot prefix="$(arg prefix_leader)">
   </xacro:create_robot>
