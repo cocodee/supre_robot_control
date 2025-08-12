@@ -5,7 +5,6 @@ from launch.actions import DeclareLaunchArgument, RegisterEventHandler, GroupAct
 from launch.event_handlers import OnProcessExit,OnProcessStart
 from launch.substitutions import Command, FindExecutable, LaunchConfiguration, PathJoinSubstitution
 from launch_ros.actions import Node,PushRosNamespace
-from launch_ros.subxstitutions import FindPackageShare
 
 def generate_launch_description():
     # Get the package share directory
