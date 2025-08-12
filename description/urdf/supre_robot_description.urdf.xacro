@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro" params="name prefix">
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <xacro:macro name="create_robot">
+  <xacro:macro name="create_robot" params="name prefix">
     <!-- Used for fixing robot to Gazebo 'world' -->
 
     <joint name="${prefix}base_joint" type="fixed">
