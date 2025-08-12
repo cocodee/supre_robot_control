@@ -1,0 +1,44 @@
+# This file configures the controllers for the supre robot.
+controller_manager:
+  ros__parameters:
+    update_rate: 50  # Hz
+    # Broadcaster for joint states
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+    left_arm_controller:
+      type: position_controllers/JointGroupPositionController
+    right_arm_controller:
+      type: position_controllers/JointGroupPositionController
+    misumi_gripper_controller:
+      type: forward_command_controller/ForwardCommandController
+# Parameters for the left arm controller
+left_arm_controller:
+  ros__parameters:
+    joints:
+      - leader_left_arm_joint_1
+      - leader_left_arm_joint_2
+      - leader_left_arm_joint_3
+      - leader_left_arm_joint_4
+      - leader_left_arm_joint_5
+      - leader_left_arm_joint_6
+      - leader_left_arm_joint_7
+    interface_name: "position"
+
+# Parameters for the right arm controller
+right_arm_controller:
+  ros__parameters:
+    joints:
+      - leader_right_arm_joint_1
+      - leader_right_arm_joint_2
+      - leader_right_arm_joint_3
+      - leader_right_arm_joint_4
+      - leader_right_arm_joint_5
+      - leader_right_arm_joint_6
+      - leader_right_arm_joint_7
+    interface_name: "position"
+
+misumi_gripper_controller:
+  ros__parameters:
+    joints: 
+      - leader_gripper_joint # Must match the joint name in the URDF
+    interface_name: position

@@ -1,0 +1,62 @@
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="supre_robot">
+
+  <!-- Enable setting arguments from the launch file -->
+  <xacro:arg name="use_mock_hardware" default="false" />
+  <xacro:arg name="prefix_leader" default="leader_" />
+  <xacro:arg name="prefix_follower" default="follower_" />
+  <xacro:arg name="leader_param_can_device_index" default="0" />
+  <xacro:arg name="leader_param_can_baud_rate" default="1000" />
+  <xacro:arg name="leader_param_device" default="/dev/ttyTHS1" />
+  <xacro:arg name="leader_param_slave_id" default="10" />
+  <xacro:arg name="leader_param_baud_rate" default="115200" />
+  <xacro:arg name="leader_param_max_stroke" default="0.04" />
+
+  <xacro:arg name="follower_param_can_device_index" default="0" />
+  <xacro:arg name="follower_param_can_baud_rate" default="1000" />
+  <xacro:arg name="follower_param_device" default="/dev/ttyTHS1" />
+  <xacro:arg name="follower_param_slave_id" default="10" />
+  <xacro:arg name="follower_param_baud_rate" default="115200" />
+  <xacro:arg name="follower_param_max_stroke" default="0.04" />
+
+  <xacro:include filename="$(find supre_robot_control)/urdf/supre_robot_description.urdf.xacro"/>
+  <!-- Import joints ros2_control description -->
+  <xacro:include filename="$(find supre_robot_control)/ros2_control/joints.ros2_control.xacro"/>
+
+  <!-- Import gripper description -->
+  <xacro:include filename="$(find supre_robot_control)/ros2_control/gripper.ros2_control.xacro"/>
+
+  <link name="${prefix}world"/>
+
+  <xacro:create_robot prefix="$(arg prefix_leader)">
+  </xacro:create_robot>
+  <xacro:create_robot prefix="$(arg prefix_follower)">
+  </xacro:create_robot>
+
+  <xacro:gripper_system
+    name="MisumiGripper" prefix="$(arg prefix_leader)"
+    use_mock_hardware="$(arg use_mock_hardware)"
+    param_device="$(arg leader_param_device)"
+    param_slave_id="$(arg leader_param_slave_id)"
+    param_baud_rate="$(arg leader_param_baud_rate)"
+    param_max_stroke="$(arg leader_param_max_stroke)" />
+
+  <xacro:joints_system
+    name="EyouSystem" prefix="$(arg prefix_leader)"
+    use_mock_hardware="$(arg use_mock_hardware)"
+    param_can_device_index="$(arg leader_param_can_device_index)" 
+    param_can_baud_rate="$(arg leader_param_can_baud_rate)" />
+
+  <xacro:gripper_system
+    name="MisumiGripper" prefix="$(arg prefix_follower)"
+    use_mock_hardware="$(arg use_mock_hardware)"
+    param_device="$(arg follower_param_device)"
+    param_slave_id="$(arg follower_param_slave_id)"
+    param_baud_rate="$(arg follower_param_baud_rate)"
+    param_max_stroke="$(arg follower_param_max_stroke)" />
+
+  <xacro:joints_system
+    name="EyouSystem" prefix="$(arg prefix_follower)"
+    use_mock_hardware="$(arg use_mock_hardware)"
+    param_can_device_index="$(arg follower_param_can_device_index)" 
+    param_can_baud_rate="$(arg follower_param_can_baud_rate)" />    
+</robot>

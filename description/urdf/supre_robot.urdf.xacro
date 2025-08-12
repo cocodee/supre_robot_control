@@ -17,8 +17,10 @@
   <!-- Import gripper description -->
   <xacro:include filename="$(find supre_robot_control)/ros2_control/gripper.ros2_control.xacro" />
 
-  <xacro:supre_robot>
-  </xacro:supre_robot>
+  <link name="world"/>
+
+  <xacro:create_robot>
+  </xacro:create_robot>
 
   <xacro:gripper_system
     name="MisumiGripper" prefix="$(arg prefix)"
