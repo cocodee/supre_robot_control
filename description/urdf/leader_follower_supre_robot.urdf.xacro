@@ -33,7 +33,7 @@
   </xacro:create_robot>
 
   <xacro:gripper_system
-    name="MisumiGripper" prefix="$(arg prefix_leader)"
+    name="LeaderMisumiGripper" prefix="$(arg prefix_leader)"
     use_mock_hardware="$(arg use_mock_hardware)"
     param_device="$(arg leader_param_device)"
     param_slave_id="$(arg leader_param_slave_id)"
@@ -41,13 +41,13 @@
     param_max_stroke="$(arg leader_param_max_stroke)" />
 
   <xacro:joints_system
-    name="EyouSystem" prefix="$(arg prefix_leader)"
+    name="LeaderEyouSystem" prefix="$(arg prefix_leader)"
     use_mock_hardware="$(arg use_mock_hardware)"
     param_can_device_index="$(arg leader_param_can_device_index)" 
     param_can_baud_rate="$(arg leader_param_can_baud_rate)" />
 
   <xacro:gripper_system
-    name="MisumiGripper" prefix="$(arg prefix_follower)"
+    name="FollowerMisumiGripper" prefix="$(arg prefix_follower)"
     use_mock_hardware="$(arg use_mock_hardware)"
     param_device="$(arg follower_param_device)"
     param_slave_id="$(arg follower_param_slave_id)"
@@ -55,7 +55,7 @@
     param_max_stroke="$(arg follower_param_max_stroke)" />
 
   <xacro:joints_system
-    name="EyouSystem" prefix="$(arg prefix_follower)"
+    name="FollowerEyouSystem" prefix="$(arg prefix_follower)"
     use_mock_hardware="$(arg use_mock_hardware)"
     param_can_device_index="$(arg follower_param_can_device_index)" 
     param_can_baud_rate="$(arg follower_param_can_baud_rate)" />    
