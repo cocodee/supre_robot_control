@@ -19,7 +19,7 @@
 
   <link name="world"/>
 
-  <xacro:create_robot>
+  <xacro:create_robot prefix="$(arg prefix)">
   </xacro:create_robot>
 
   <xacro:gripper_system
