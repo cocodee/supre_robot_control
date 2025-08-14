@@ -36,9 +36,3 @@
       - leader_right_arm_joint_6
       - leader_right_arm_joint_7
     interface_name: "position"
-
-/supre_robot_leader/misumi_gripper_controller:
-  ros__parameters:
-    joints: 
-      - leader_gripper_joint # Must match the joint name in the URDF
-    interface_name: position

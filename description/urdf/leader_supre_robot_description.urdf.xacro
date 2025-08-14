@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="create_robot" params="prefix">
+    <!-- Used for fixing robot to Gazebo 'world' -->
+
+    <joint name="${prefix}base_joint" type="fixed">
+        <parent link="world"/>
+        <child link="${prefix}base_link"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+
+    <link name="${prefix}base_link">
+        <visual>
+            <geometry>
+                <cylinder length="0.05" radius="0.2"/>
+            </geometry>
+            <material name="blue">
+                <color rgba="0.0 0.0 1.0 1.0"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder length="0.05" radius="0.2"/>
+            </geometry>
+        </collision>
+    </link>
+    
+    <link name="${prefix}gripper_finger_link">
+        <visual>
+            <geometry>
+                <box size="0.1 0.02 0.02"/>
+            </geometry>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.1 0.02 0.02"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="0.1"/>
+            <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+        </inertial>
+    </link>
+  </xacro:macro>
+
+</robot>

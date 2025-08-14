@@ -10,17 +10,28 @@
   <xacro:arg name="param_baud_rate" default="115200" />
   <xacro:arg name="param_max_stroke" default="0.04" />
 
-  <xacro:include filename="$(find supre_robot_control)/urdf/leader_supre_robot_description.urdf.xacro" />
+  <xacro:include filename="$(find supre_robot_control)/urdf/supre_robot_description.urdf.xacro" />
   <!-- Import joints ros2_control description -->
-  <xacro:include filename="$(find supre_robot_control)/ros2_control/joints.ros2_control.xacro" />
+  <xacro:include filename="$(find supre_robot_control)/ros2_control/follower_joints.ros2_control.xacro" />
+
+  <!-- Import gripper description -->
+  <xacro:include filename="$(find supre_robot_control)/ros2_control/gripper.ros2_control.xacro" />
 
   <link name="world"/>
 
   <xacro:create_robot prefix="$(arg prefix)">
   </xacro:create_robot>
 
+  <xacro:gripper_system
+    name="FollowerMisumiGripper" prefix="$(arg prefix)"
+    use_mock_hardware="$(arg use_mock_hardware)"
+    param_device="$(arg param_device)"
+    param_slave_id="$(arg param_slave_id)"
+    param_baud_rate="$(arg param_baud_rate)"
+    param_max_stroke="$(arg param_max_stroke)" />
+
   <xacro:joints_system
-    name="LeaderEyouSystem" prefix="$(arg prefix)"
+    name="FollowerEyouSystem" prefix="$(arg prefix)"
     use_mock_hardware="$(arg use_mock_hardware)"
     param_can_device_index="$(arg param_can_device_index)" 
     param_can_baud_rate="$(arg param_can_baud_rate)" />

@@ -36,9 +36,3 @@
       - follower_right_arm_joint_6
       - follower_right_arm_joint_7
     interface_name: "position"
-
-/supre_robot_follower/misumi_gripper_controller:
-  ros__parameters:
-    joints: 
-      - follower_gripper_joint # Must match the joint name in the URDF
-    interface_name: position

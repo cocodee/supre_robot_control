@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+<xacro:macro name="joints_system" params="name prefix use_mock_hardware:=^|true param_can_device_index:=0 param_can_baud_rate:=1000">
+    <ros2_control name="${name}" type="system">
+
+        <hardware>
+            <!-- The plugin name must match the class name in the C++ code -->
+            <plugin>supre_robot_control/EyouSystemInterface</plugin>
+            <!-- Parameters for the CAN device -->
+            <param name="can_device_index">${param_can_device_index}</param>
+            <param name="can_baud_rate">${param_can_baud_rate}</param>
+        </hardware>
+
+        <!-- Left Arm Joints -->
+        <joint name="${prefix}left_arm_joint_1">
+            <param name="node_id">21</param>
+            <param name="start_enabled">false</param>
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>
+        <joint name="${prefix}left_arm_joint_2">
+            <param name="node_id">22</param>
+            <param name="start_enabled">false</param>
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>
+        <joint name="${prefix}left_arm_joint_3">
+            <param name="node_id">23</param>
+            <param name="start_enabled">false</param>
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>
+        <joint name="${prefix}left_arm_joint_4">
+            <param name="node_id">24</param>
+            <param name="start_enabled">false</param>
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>
+        <joint name="${prefix}left_arm_joint_5">
+            <param name="node_id">25</param>
+            <param name="start_enabled">false</param>
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>
+        <joint name="${prefix}left_arm_joint_6">
+            <param name="node_id">26</param>
+            <param name="start_enabled">false</param>
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>
+
+        <!-- Right Arm Joints -->
+        <joint name="${prefix}right_arm_joint_1">
+            <param name="node_id">11</param>
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>
+        <joint name="${prefix}right_arm_joint_2">
+            <param name="node_id">12</param>
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>
+        <joint name="${prefix}right_arm_joint_3">
+            <param name="node_id">13</param>
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>
+        <joint name="${prefix}right_arm_joint_4">
+            <param name="node_id">14</param>
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>
+        <joint name="${prefix}right_arm_joint_5">
+            <param name="node_id">15</param>
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>
+        <joint name="${prefix}right_arm_joint_6">
+            <param name="node_id">16</param>
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>
+    </ros2_control>
+
+  </xacro:macro>
+</robot>
