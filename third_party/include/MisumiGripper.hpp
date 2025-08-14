@@ -6,6 +6,7 @@
 #include <vector>
 #include <cstdint>
 #include <modbus/modbus.h>
+#include "MisumiGripperBus.hpp"
 // 前向声明，避免在头文件中包含 libmodbus 的头文件
 
 // 定义寄存器地址，提高可读性
@@ -47,17 +48,8 @@ struct GripperStatus {
 
 class MisumiGripper {
 public:
-    /**
-     * @brief 构造函数
-     * @param device 串口设备路径 (例如 "/dev/ttyUSB0" on Linux, "COM3" on Windows)
-     * @param slave_id 夹爪的 Modbus 从站 ID (1-247)
-     * @param baud_rate 波特率，默认为 115200
-     * @param parity 校验位 ('N', 'E', 'O')，默认为 'N'
-     * @param data_bit 数据位 (5-8)，默认为 8
-     * @param stop_bit 停止位 (1-2)，默认为 1
-     */
-    MisumiGripper(const std::string& device, int slave_id, 
-                  int baud_rate = 115200, char parity = 'N', int data_bit = 8, int stop_bit = 1);
+    // 构造函数现在接收一个总线引用和自己的从站ID
+    MisumiGripper(MisumiGripperBus& bus, int slave_id);
 
     /**
      * @brief 析构函数，自动关闭连接并释放资源
@@ -67,22 +59,6 @@ public:
     // 禁止拷贝和赋值
     MisumiGripper(const MisumiGripper&) = delete;
     MisumiGripper& operator=(const MisumiGripper&) = delete;
-
-    /**
-     * @brief 连接到夹爪
-     * @return true 如果连接成功, false 如果失败
-     */
-    bool connect();
-
-    /**
-     * @brief 断开与夹爪的连接
-     */
-    void disconnect();
-
-    /**
-     * @brief 检查是否已连接
-     */
-    bool isConnected() const;
 
     /**
      * @brief 获取最近一次操作的错误信息
@@ -157,15 +133,9 @@ private:
     bool writeRegister(int addr, uint16_t value);
     bool writeRegisters(int start_addr, const std::vector<uint16_t>& values);
     bool readRegisters(int start_addr, int num, uint16_t* dest);
-    
-    modbus_t* m_ctx = nullptr; // libmodbus 上下文指针
-    std::string m_device;
+
+    MisumiGripperBus& m_bus; // 引用总线对象
     int m_slave_id;
-    int m_baud_rate;
-    char m_parity;
-    int m_data_bit;
-    int m_stop_bit;
-    bool m_is_connected = false;
     std::string m_last_error;
 };
 

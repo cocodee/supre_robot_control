@@ -39,8 +39,16 @@ public:
   hardware_interface::return_type write(const rclcpp::Time & time, const rclcpp::Duration & period) override;
 
 private:
-  std::unique_ptr<MisumiGripper> gripper_client_;
+  // --- MODIFICATION START ---
+  // 单一的、共享的通信总线
+  std::unique_ptr<MisumiGripperBus> gripper_bus_;
   
+  // 每个关节对应一个夹爪客户端实例
+  std::vector<std::unique_ptr<MisumiGripper>> gripper_clients_;
+  
+  // 存储每个关节对应的 slave_id
+  std::vector<int> slave_ids_;
+  // --- MODIFICATION END ---  
   // Store the commands for the simulated robot
   std::vector<double> hw_commands_;
   std::vector<double> hw_states_position_;
