@@ -15,8 +15,8 @@ def generate_launch_description():
         ),
         launch_arguments={
             'namespace': 'supre_robot_leader',
-            'urdf_file': 'leader_supre_robot.urdf.xacro',
-            'controllers_file': 'leader_robot_controllers.yaml',
+            'urdf_file_name': 'leader_supre_robot.urdf.xacro',
+            'controllers_file_name': 'leader_robot_controllers.yaml',
             'robot_prefix': 'leader_',
             'can_device_index': '0',
             'serial_device': '/dev/ttyTHS1',
@@ -30,8 +30,8 @@ def generate_launch_description():
 #    ),
 #    launch_arguments={
 #        'namespace': 'supre_robot_follower',
-#        'urdf_file': 'supre_robot_follower.urdf.xacro',
-#        'controllers_file': 'follower_robot_controllers.yaml',
+#        'urdf_file_name': 'supre_robot_follower.urdf.xacro',
+#        'controllers_file_name': 'follower_robot_controllers.yaml',
 #        'robot_prefix': 'follower_',
 #        'can_device_index': '0',
 #        'serial_device': '/dev/ttyTHS1',

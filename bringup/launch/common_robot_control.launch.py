@@ -63,7 +63,7 @@ def generate_launch_description():
 
     declared_arguments.append(
         DeclareLaunchArgument(
-            "urdf_file",
+            "urdf_file_name",
             default_value="",
             description="urdf file name",
         )
@@ -71,7 +71,7 @@ def generate_launch_description():
 
     declared_arguments.append(
         DeclareLaunchArgument(
-            "controllers_file",
+            "controllers_file_name",
             default_value="",
             description="controllers file name",
         )
@@ -86,14 +86,21 @@ def generate_launch_description():
     )
 
     # Get URDF file path
-    urdf_file = os.path.join(pkg_share,'urdf',LaunchConfiguration("urdf_file"))
+    urdf_file_name = LaunchConfiguration("urdf_file_name")
     robot_prefix = LaunchConfiguration("robot_prefix")
     param_can_device_index = LaunchConfiguration("can_device_index")
     param_device = LaunchConfiguration("serial_device")
     param_slave_id = LaunchConfiguration("serial_slave_id")
-    controllers_file = LaunchConfiguration("controllers_file")
+    controllers_file_name = LaunchConfiguration("controllers_file_name")
 
-    robot_description_content = Command(['xacro ', urdf_file,
+    urdf_file_path = PathJoinSubstitution(
+        [pkg_share, 'urdf', urdf_file_name]
+    )
+    controllers_file_path = PathJoinSubstitution(
+        [pkg_share, 'config', controllers_file_name]
+    )
+
+    robot_description_content = Command(['xacro ', urdf_file_path,
          ' prefix:=', robot_prefix,
          ' param_can_device_index:=', param_can_device_index,
          ' param_device:=',param_device,
@@ -101,7 +108,6 @@ def generate_launch_description():
     robot_description = {"robot_description": robot_description_content}
 
     # Get controller config file path
-    controllers_file = os.path.join(pkg_share,'config', controllers_file)
     namespace = LaunchConfiguration("namespace")
     # Robot state publisher node
     robot_state_publisher_node = Node(
@@ -116,7 +122,7 @@ def generate_launch_description():
     controller_manager_node = Node(
         package="controller_manager",
         executable="ros2_control_node",
-        parameters=[robot_description, controllers_file],
+        parameters=[robot_description, controllers_file_path],
         output="screen",
         namespace=namespace,
     )
