@@ -217,5 +217,7 @@ def generate_launch_description():
             left_arm_controller_spawner,
             right_arm_controller_spawner,
             gripper_controller_spawner,
+            left_arm_trajectory_controller_spawner,
+            right_arm_trajectory_controller_spawner
         ]
     )
