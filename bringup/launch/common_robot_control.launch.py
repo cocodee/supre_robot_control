@@ -155,6 +155,20 @@ def generate_launch_description():
         namespace=namespace,
     )
 
+    left_arm_trajectory_controller_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["left_arm_trajectory_controller", "--controller-manager", controller_manager_name],
+        namespace=namespace,
+    )
+
+    # Right arm controller spawner
+    right_arm_trajectory_controller_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["right_arm_trajectory_controller", "--controller-manager", controller_manager_name],
+        namespace=namespace,
+    )
     # Spawner for the main gripper controller
     gripper_controller_spawner = Node(
         package="controller_manager",
