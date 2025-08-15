@@ -72,6 +72,7 @@
         </joint>
         <joint name="${prefix}right_arm_joint_3">
             <param name="node_id">13</param>
+            <param name="start_enabled">false</param>            
             <command_interface name="position"/>
             <state_interface name="position"/>
             <state_interface name="velocity"/>
