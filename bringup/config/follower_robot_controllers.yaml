@@ -51,7 +51,11 @@
       - follower_left_arm_joint_5
       - follower_left_arm_joint_6
 #      - follower_left_arm_joint_7 
-    interface_name: "position"
+    command_interfaces: # <--- 硬件是否提供了这些接口？
+        - position
+    state_interfaces:
+        - position
+        - velocity
 
 /supre_robot_follower/right_arm_trajectory_controller:
   ros__parameters:
@@ -63,4 +67,8 @@
       - follower_left_arm_joint_5
       - follower_left_arm_joint_6
 #      - follower_left_arm_joint_7 
-    interface_name: "position"
+    command_interfaces: # <--- 硬件是否提供了这些接口？
+        - position
+    state_interfaces:
+        - position
+        - velocity
