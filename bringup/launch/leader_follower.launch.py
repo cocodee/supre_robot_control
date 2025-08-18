@@ -40,6 +40,6 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
-        leader_launch,
+        #leader_launch,
         follower_launch,
     ])

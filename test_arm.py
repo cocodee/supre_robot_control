@@ -15,7 +15,7 @@ class TrajectoryActionClient(Node):
     def __init__(self):
         super().__init__('trajectory_action_client')
         # 确认控制器名称与YAML文件一致
-        self._action_client = ActionClient(self, FollowJointTrajectory, '/supre_robot_follower/right_arm_trajectory_controller/follow_joint_trajectory')
+        self._action_client = ActionClient(self, FollowJointTrajectory, '/supre_robot_follower/right_arm_trajectory_controller/joint_trajectory')
 
     def send_goal(self, positions, time_from_start_sec=2):
         """
