@@ -139,12 +139,12 @@ def main(args=None):
             'time_sec': 3
         },
         {
-            'left_positions':  [0.0, -90.0, 0.0, -90.0, 0.0, 0.0], 
+            'left_positions':  [0.0, -90.0, 0.0, 90.0, 0.0, 0.0], 
             'right_positions': [0.0, 90.0, 0.0, 90.0, 0.0, 0.0], 
             'time_sec': 5
         },
         {
-            'left_positions':  [0.0, 0.0, 0.0, -90.0, 0.0, 0.0], 
+            'left_positions':  [0.0, 0.0, 0.0, 90.0, 0.0, 0.0], 
             'right_positions': [0.0, 0.0, 0.0, 90.0, 0.0, 0.0], 
             'time_sec': 3
         },        
