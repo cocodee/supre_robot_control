@@ -14,8 +14,16 @@ class TrajectoryActionClient(Node):
     """
     def __init__(self):
         super().__init__('trajectory_action_client')
+        action_qos_profile = rclpy.qos.qos_profile_system_default
         # 确认控制器名称与YAML文件一致
-        self._action_client = ActionClient(self, FollowJointTrajectory, '/supre_robot_follower/right_arm_trajectory_controller/joint_trajectory')
+        self._action_client = ActionClient(self, 
+                                           FollowJointTrajectory, 
+                                           '/supre_robot_follower/right_arm_trajectory_controller/follow_joint_trajectory',
+                                           goal_service_qos_profile=action_qos_profile,
+                                           result_service_qos_profile=action_qos_profile,
+                                           cancel_service_qos_profile=action_qos_profile,
+                                           feedback_topic_qos_profile=action_qos_profile,
+                                           status_topic_qos_profile=action_qos_profile)
 
     def send_goal(self, positions, time_from_start_sec=2):
         """
