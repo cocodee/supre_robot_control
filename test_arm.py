@@ -21,8 +21,7 @@ class TrajectoryActionClient(Node):
                                            '/supre_robot_follower/right_arm_trajectory_controller/follow_joint_trajectory',
                                            goal_service_qos_profile=action_qos_profile,
                                            result_service_qos_profile=action_qos_profile,
-                                           cancel_service_qos_profile=action_qos_profile,
-                                           status_topic_qos_profile=action_qos_profile)
+                                           cancel_service_qos_profile=action_qos_profile)
 
     def send_goal(self, positions, time_from_start_sec=2):
         """
