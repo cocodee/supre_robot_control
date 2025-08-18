@@ -196,8 +196,8 @@ hardware_interface::return_type EyouSystemInterface::write(const rclcpp::Time & 
             motor_nodes_[i]->sendCspTargetPosition(hw_commands_positions_[i], 0, true);
             RCLCPP_INFO(rclcpp::get_logger("EyouSystemInterface"), "send motor position %f, node_id:%d",hw_commands_positions_[i],motor_nodes_[i]->getNodeId());
             any_motor_enabled = true;
-            auto error_code = motor_nodes_[i]->getErrorCode();
-            RCLCPP_INFO(rclcpp::get_logger("EyouSystemInterface"), "motor error code:%d",error_code);
+            //auto error_code = motor_nodes_[i]->getErrorCode();
+            //RCLCPP_INFO(rclcpp::get_logger("EyouSystemInterface"), "motor error code:%d",error_code);
         }
     }
 
