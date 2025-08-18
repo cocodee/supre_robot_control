@@ -22,7 +22,6 @@ class TrajectoryActionClient(Node):
                                            goal_service_qos_profile=action_qos_profile,
                                            result_service_qos_profile=action_qos_profile,
                                            cancel_service_qos_profile=action_qos_profile,
-                                           feedback_topic_qos_profile=action_qos_profile,
                                            status_topic_qos_profile=action_qos_profile)
 
     def send_goal(self, positions, time_from_start_sec=2):
