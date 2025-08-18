@@ -14,16 +14,23 @@ class DualArmTrajectoryExecutor(Node):
     """
     def __init__(self):
         super().__init__('dual_arm_trajectory_executor')
-        
+        action_qos_profile = rclpy.qos.qos_profile_system_default
+
         # 创建右臂的 Action Client
         self._right_arm_client = ActionClient(
             self, FollowJointTrajectory, 
-            '/supre_robot_follower/right_arm_trajectory_controller/follow_joint_trajectory')
+            '/supre_robot_follower/right_arm_trajectory_controller/follow_joint_trajectory',
+            goal_service_qos_profile=action_qos_profile,
+            result_service_qos_profile=action_qos_profile,
+            cancel_service_qos_profile=action_qos_profile)
             
         # 创建左臂的 Action Client
         self._left_arm_client = ActionClient(
             self, FollowJointTrajectory, 
-            '/supre_robot_follower/left_arm_trajectory_controller/follow_joint_trajectory')
+            '/supre_robot_follower/left_arm_trajectory_controller/follow_joint_trajectory',
+            goal_service_qos_profile=action_qos_profile,
+            result_service_qos_profile=action_qos_profile,
+            cancel_service_qos_profile=action_qos_profile)            
         
         self.get_logger().info('双臂轨迹执行器已启动。')
         
