@@ -31,7 +31,7 @@ def generate_launch_description():
         launch_arguments={
             'namespace': 'supre_robot_follower',
             'urdf_file_name': 'follower_supre_robot.urdf.xacro',
-            'controllers_file_name': 'follower_robot_controllers.yaml',
+            'controllers_file_name': 'follower_robot_controllers_traj.yaml',
             'robot_prefix': 'follower_',
             'can_device_index': '1',
             'serial_device': '/dev/ttyTHS2',
@@ -40,6 +40,6 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
-        leader_launch,
+        #leader_launch,
         follower_launch,
     ])
