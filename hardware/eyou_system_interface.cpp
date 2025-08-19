@@ -137,6 +137,11 @@ hardware_interface::CallbackReturn EyouSystemInterface::on_activate(const rclcpp
                 RCLCPP_ERROR(rclcpp::get_logger("EyouSystemInterface"), "Failed to start auto feedback for joint %s", info_.joints[i].name.c_str());
                 return hardware_interface::CallbackReturn::ERROR;
             }
+
+            if (!motor_nodes_[i]->startErrorFeedbackTPDO(1, 255, 60)) {
+                RCLCPP_ERROR(rclcpp::get_logger("EyouSystemInterface"), "Failed to start error feedback for joint %s", info_.joints[i].name.c_str());
+                return hardware_interface::CallbackReturn::ERROR;
+            }            
         } else {
             RCLCPP_INFO(rclcpp::get_logger("EyouSystemInterface"), "Skipping activation for joint %s as it is disabled.", info_.joints[i].name.c_str());
             motor_nodes_[i]->disable();
@@ -145,10 +150,14 @@ hardware_interface::CallbackReturn EyouSystemInterface::on_activate(const rclcpp
                 return hardware_interface::CallbackReturn::ERROR;
             }            
             // Configure TPDO1 for feedback every 10ms
-            if (!motor_nodes_[i]->startAutoFeedback(0, 255, 10)) {
+            if (!motor_nodes_[i]->startAutoFeedback(0, 255, 20)) {
                 RCLCPP_ERROR(rclcpp::get_logger("EyouSystemInterface"), "Failed to start auto feedback for joint %s", info_.joints[i].name.c_str());
                 return hardware_interface::CallbackReturn::ERROR;
             }
+            if (!motor_nodes_[i]->startErrorFeedbackTPDO(1, 255, 60)) {
+                RCLCPP_ERROR(rclcpp::get_logger("EyouSystemInterface"), "Failed to start error feedback for joint %s", info_.joints[i].name.c_str());
+                return hardware_interface::CallbackReturn::ERROR;
+            }                        
         }
     }
     
