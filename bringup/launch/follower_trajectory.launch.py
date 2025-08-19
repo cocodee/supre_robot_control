@@ -9,24 +9,24 @@ def generate_launch_description():
     pkg_share = FindPackageShare('supre_robot_control')
     
    # --- Leader Launch ---
-    leader_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            PathJoinSubstitution([pkg_share, 'launch', 'common_robot_control.launch.py'])
-        ),
-        launch_arguments={
-            'namespace': 'supre_robot_leader',
-            'urdf_file_name': 'leader_supre_robot.urdf.xacro',
-            'controllers_file_name': 'leader_robot_controllers.yaml',
-            'robot_prefix': 'leader_',
-            'can_device_index': '0',
-            'serial_device': '/dev/ttyTHS1',
-            'serial_slave_id': '10'
-        }.items()
-    )
+    #leader_launch = IncludeLaunchDescription(
+    #    PythonLaunchDescriptionSource(
+    #        PathJoinSubstitution([pkg_share, 'launch', 'common_robot_control.launch.py'])
+    #    ),
+    #    launch_arguments={
+    #        'namespace': 'supre_robot_leader',
+    #        'urdf_file_name': 'leader_supre_robot.urdf.xacro',
+    #        'controllers_file_name': 'leader_robot_controllers.yaml',
+    #        'robot_prefix': 'leader_',
+    #        'can_device_index': '0',
+    #        'serial_device': '/dev/ttyTHS1',
+    #        'serial_slave_id': '10'
+    #    }.items()
+    #)
 
     follower_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            PathJoinSubstitution([pkg_share, 'launch', 'common_robot_control.launch.py'])
+            PathJoinSubstitution([pkg_share, 'launch', 'trajectory_robot_control.launch.py'])
         ),
         launch_arguments={
             'namespace': 'supre_robot_follower',
