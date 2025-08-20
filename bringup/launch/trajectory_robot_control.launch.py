@@ -153,14 +153,6 @@ def generate_launch_description():
         arguments=["right_arm_trajectory_controller", "--controller-manager", controller_manager_name],
         namespace=namespace,
     )
-    # Spawner for the main gripper controller
-    gripper_controller_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["misumi_gripper_controller", "--controller-manager", controller_manager_name],
-        output="screen",
-        namespace=namespace,
-    )    
 
     # Left gripper controller spawner
     #left_gripper_controller_spawner = Node(
@@ -198,7 +190,6 @@ def generate_launch_description():
             controller_manager_node,
             #delay_spawners_after_controller_manager,
             joint_state_broadcaster_spawner,
-            gripper_controller_spawner,
             left_arm_trajectory_controller_spawner,
             right_arm_trajectory_controller_spawner
         ]

@@ -13,9 +13,6 @@
   <!-- Import joints ros2_control description -->
   <xacro:include filename="$(find supre_robot_control)/ros2_control/follower_joints.ros2_control.xacro" />
 
-  <!-- Import gripper description -->
-  <xacro:include filename="$(find supre_robot_control)/ros2_control/gripper.ros2_control.xacro" />
-
   <link name="world"/>
 
   <xacro:create_robot prefix="$(arg prefix)">
