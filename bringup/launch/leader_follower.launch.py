@@ -20,7 +20,6 @@ def generate_launch_description():
             'robot_prefix': 'leader_',
             'can_device_index': '0',
             'serial_device': '/dev/ttyTHS1',
-            'serial_slave_id': '10'
         }.items()
     )
 
@@ -35,7 +34,6 @@ def generate_launch_description():
             'robot_prefix': 'follower_',
             'can_device_index': '1',
             'serial_device': '/dev/ttyTHS2',
-            'serial_slave_id': '17'
         }.items()
     )
 
