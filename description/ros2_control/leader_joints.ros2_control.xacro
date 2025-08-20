@@ -98,6 +98,12 @@
             <state_interface name="position"/>
             <state_interface name="velocity"/>
         </joint>
+        <joint name="${prefix}right_arm_joint_7">
+            <param name="node_id">17</param>
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>        
     </ros2_control>
 
   </xacro:macro>
