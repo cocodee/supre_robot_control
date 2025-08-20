@@ -104,7 +104,7 @@ def generate_launch_description():
          ' prefix:=', robot_prefix,
          ' param_can_device_index:=', param_can_device_index,
          ' param_device:=',param_device,
-         ' param_slave_id:=', param_slave_id])
+         ])
     robot_description = {"robot_description": robot_description_content}
 
     # Get controller config file path
