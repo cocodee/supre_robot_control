@@ -19,7 +19,6 @@
       - follower_left_arm_joint_4
       - follower_left_arm_joint_5
       - follower_left_arm_joint_6
-      - follower_left_arm_joint_7
     interface_name: "position"
 
 # Parameters for the right arm controller
