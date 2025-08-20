@@ -17,9 +17,9 @@
             <command_interface name="position">
                 <param name="min">0</param>
                 <param name="max">${param_max_stroke}</param>
-                <param name="slave_id">17</param>
             </command_interface>
             <state_interface name="position"/>
+            <param name="slave_id">17</param> 
         </joint>            
     </ros2_control>
 </xacro:macro>
