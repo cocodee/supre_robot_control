@@ -6,7 +6,6 @@
   <xacro:arg name="param_can_device_index" default="0" />
   <xacro:arg name="param_can_baud_rate" default="1000" />
   <xacro:arg name="param_device" default="/dev/ttyTHS1" />
-  <xacro:arg name="param_slave_id" default="10" />
   <xacro:arg name="param_baud_rate" default="115200" />
   <xacro:arg name="param_max_stroke" default="0.04" />
 
@@ -26,7 +25,6 @@
     name="MisumiGripper" prefix="$(arg prefix)"
     use_mock_hardware="$(arg use_mock_hardware)"
     param_device="$(arg param_device)"
-    param_slave_id="$(arg param_slave_id)"
     param_baud_rate="$(arg param_baud_rate)"
     param_max_stroke="$(arg param_max_stroke)" />
 

@@ -7,7 +7,6 @@
   <xacro:arg name="leader_param_can_device_index" default="0" />
   <xacro:arg name="leader_param_can_baud_rate" default="1000" />
   <xacro:arg name="leader_param_device" default="/dev/ttyTHS1" />
-  <xacro:arg name="leader_param_slave_id" default="10" />
   <xacro:arg name="leader_param_baud_rate" default="115200" />
   <xacro:arg name="leader_param_max_stroke" default="0.04" />
 
