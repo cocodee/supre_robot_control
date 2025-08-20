@@ -47,22 +47,6 @@ def generate_launch_description():
 
     declared_arguments.append(
         DeclareLaunchArgument(
-            "serial_slave_id",
-            default_value="",
-            description="param_slave_id",
-        )
-    )
-
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "serial_slave_id",
-            default_value="",
-            description="param_slave_id",
-        )
-    )
-
-    declared_arguments.append(
-        DeclareLaunchArgument(
             "urdf_file_name",
             default_value="",
             description="urdf file name",
@@ -90,7 +74,6 @@ def generate_launch_description():
     robot_prefix = LaunchConfiguration("robot_prefix")
     param_can_device_index = LaunchConfiguration("can_device_index")
     param_device = LaunchConfiguration("serial_device")
-    param_slave_id = LaunchConfiguration("serial_slave_id")
     controllers_file_name = LaunchConfiguration("controllers_file_name")
 
     urdf_file_path = PathJoinSubstitution(
@@ -104,7 +87,7 @@ def generate_launch_description():
          ' prefix:=', robot_prefix,
          ' param_can_device_index:=', param_can_device_index,
          ' param_device:=',param_device,
-         ' param_slave_id:=', param_slave_id])
+         ])
     robot_description = {"robot_description": robot_description_content}
 
     # Get controller config file path
@@ -158,7 +141,7 @@ def generate_launch_description():
     left_arm_trajectory_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["left_arm_trajectory_controller", "--controller-manager", controller_manager_name],
+        arguments=["left_arm_trajectory_controller", "--controller-manager", controller_manager_name,],
         namespace=namespace,
     )
 
