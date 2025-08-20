@@ -9,8 +9,6 @@
       type: joint_trajectory_controller/JointTrajectoryController
     right_arm_trajectory_controller:
       type: joint_trajectory_controller/JointTrajectoryController
-    misumi_gripper_controller:
-      type: forward_command_controller/ForwardCommandController
 # Parameters for the left arm controller
 
 /supre_robot_follower/left_arm_trajectory_controller:
