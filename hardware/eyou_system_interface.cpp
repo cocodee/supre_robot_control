@@ -58,7 +58,7 @@ hardware_interface::CallbackReturn EyouSystemInterface::on_init(const hardware_i
     }
 
     // Initialize motor nodes
-    try:
+    try{
         motor_nodes_.resize(info_.joints.size());
         for (size_t i = 0; i < info_.joints.size(); ++i) {
             // Assuming Node ID = joint index + 1. This should be configured in the URDF.
@@ -76,6 +76,7 @@ hardware_interface::CallbackReturn EyouSystemInterface::on_init(const hardware_i
                 }
             }
         }
+    }
     catch (const std::exception & e) {
         RCLCPP_ERROR(rclcpp::get_logger("EyouSystemInterface"), "Exception thrown while parsing urdf: %s", e.what());
         return CallbackReturn::ERROR;
