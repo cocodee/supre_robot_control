@@ -1,0 +1,36 @@
+# This file configures the controllers for the supre robot.
+/supre_robot_leader/controller_manager:
+  ros__parameters:
+    update_rate: 50  # Hz
+    # Broadcaster for joint states
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+    left_arm_controller:
+      type: position_controllers/JointGroupPositionController
+    right_arm_controller:
+      type: position_controllers/JointGroupPositionController
+# Parameters for the left arm controller
+/supre_robot_leader/left_arm_controller:
+  ros__parameters:
+    joints:
+      - leader_left_arm_joint_1
+      - leader_left_arm_joint_2
+      - leader_left_arm_joint_3
+      - leader_left_arm_joint_4
+      - leader_left_arm_joint_5
+      - leader_left_arm_joint_6
+      - leader_left_arm_joint_7
+    interface_name: "position"
+
+# Parameters for the right arm controller
+/supre_robot_leader/right_arm_controller:
+  ros__parameters:
+    joints:
+      - leader_right_arm_joint_1
+      - leader_right_arm_joint_2
+      - leader_right_arm_joint_3
+      - leader_right_arm_joint_4
+      - leader_right_arm_joint_5
+      - leader_right_arm_joint_6
+      - leader_right_arm_joint_7
+    interface_name: "position"

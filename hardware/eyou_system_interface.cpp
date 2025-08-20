@@ -58,22 +58,27 @@ hardware_interface::CallbackReturn EyouSystemInterface::on_init(const hardware_i
     }
 
     // Initialize motor nodes
-    motor_nodes_.resize(info_.joints.size());
-    for (size_t i = 0; i < info_.joints.size(); ++i) {
-        // Assuming Node ID = joint index + 1. This should be configured in the URDF.
-        huint8 node_id = std::stoi(info_.joints[i].parameters.at("node_id"));
-        RCLCPP_INFO(rclcpp::get_logger("EyouSystemInterface"), "Initializing motor for joint '%s' with Node ID %d", info_.joints[i].name.c_str(), node_id);
-        motor_nodes_[i] = std::make_shared<EuMotorNode>(can_device_index_, node_id);
-
-        // Check for start_enabled parameter
-        if (info_.joints[i].parameters.find("start_enabled") != info_.joints[i].parameters.end()) {
-            std::string start_enabled_str = info_.joints[i].parameters.at("start_enabled");
-            std::transform(start_enabled_str.begin(), start_enabled_str.end(), start_enabled_str.begin(), ::tolower);
-            if (start_enabled_str == "false") {
-                hw_start_enabled_[i] = false;
-                RCLCPP_INFO(rclcpp::get_logger("EyouSystemInterface"), "Joint '%s' is configured to be disabled on start.", info_.joints[i].name.c_str());
+    try:
+        motor_nodes_.resize(info_.joints.size());
+        for (size_t i = 0; i < info_.joints.size(); ++i) {
+            // Assuming Node ID = joint index + 1. This should be configured in the URDF.
+            huint8 node_id = std::stoi(info_.joints[i].parameters.at("node_id"));
+            RCLCPP_INFO(rclcpp::get_logger("EyouSystemInterface"), "Initializing motor for joint '%s' with Node ID %d", info_.joints[i].name.c_str(), node_id);
+            motor_nodes_[i] = std::make_shared<EuMotorNode>(can_device_index_, node_id);
+            
+            // Check for start_enabled parameter
+            if (info_.joints[i].parameters.find("start_enabled") != info_.joints[i].parameters.end()) {
+                std::string start_enabled_str = info_.joints[i].parameters.at("start_enabled");
+                std::transform(start_enabled_str.begin(), start_enabled_str.end(), start_enabled_str.begin(), ::tolower);
+                if (start_enabled_str == "false") {
+                    hw_start_enabled_[i] = false;
+                    RCLCPP_INFO(rclcpp::get_logger("EyouSystemInterface"), "Joint '%s' is configured to be disabled on start.", info_.joints[i].name.c_str());
+                }
             }
         }
+    catch (const std::exception & e) {
+        RCLCPP_ERROR(rclcpp::get_logger("EyouSystemInterface"), "Exception thrown while parsing urdf: %s", e.what());
+        return CallbackReturn::ERROR;
     }
 
     RCLCPP_INFO(rclcpp::get_logger("EyouSystemInterface"), "Initialization successful.");
