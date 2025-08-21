@@ -138,28 +138,28 @@ def generate_launch_description():
         namespace=namespace,
     )
 
-    left_arm_trajectory_controller_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["left_arm_trajectory_controller", "--controller-manager", controller_manager_name,],
-        namespace=namespace,
-    )
+    #left_arm_trajectory_controller_spawner = Node(
+    #    package="controller_manager",
+    #    executable="spawner",
+    #    arguments=["left_arm_trajectory_controller", "--controller-manager", controller_manager_name,],
+    #    namespace=namespace,
+    #)
 
     # Right arm controller spawner
-    right_arm_trajectory_controller_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["right_arm_trajectory_controller", "--controller-manager", controller_manager_name],
-        namespace=namespace,
-    )
+    #right_arm_trajectory_controller_spawner = Node(
+    #    package="controller_manager",
+    #    executable="spawner",
+    #    arguments=["right_arm_trajectory_controller", "--controller-manager", controller_manager_name],
+    #    namespace=namespace,
+    #)
     # Spawner for the main gripper controller
-    gripper_controller_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["misumi_gripper_controller", "--controller-manager", controller_manager_name],
-        output="screen",
-        namespace=namespace,
-    )    
+    #gripper_controller_spawner = Node(
+    #    package="controller_manager",
+    #    executable="spawner",
+    #    arguments=["misumi_gripper_controller", "--controller-manager", controller_manager_name],
+    #    output="screen",
+    #    namespace=namespace,
+    #)    
 
     # Left gripper controller spawner
     #left_gripper_controller_spawner = Node(
@@ -199,8 +199,8 @@ def generate_launch_description():
             joint_state_broadcaster_spawner,
             left_arm_controller_spawner,
             right_arm_controller_spawner,
-            gripper_controller_spawner,
-            left_arm_trajectory_controller_spawner,
-            right_arm_trajectory_controller_spawner
+            #gripper_controller_spawner,
+            #left_arm_trajectory_controller_spawner,
+            #right_arm_trajectory_controller_spawner
         ]
     )

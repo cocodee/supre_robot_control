@@ -21,6 +21,14 @@
   <xacro:create_robot prefix="$(arg prefix)">
   </xacro:create_robot>
 
+
+  <xacro:gripper_system
+    name="FollowerMisumiGripper" prefix="$(arg prefix)"
+    use_mock_hardware="$(arg use_mock_hardware)"
+    param_device="$(arg param_device)"
+    param_baud_rate="$(arg param_baud_rate)"
+    param_max_stroke="$(arg param_max_stroke)" />
+
   <xacro:joints_system
     name="FollowerEyouSystem" prefix="$(arg prefix)"
     use_mock_hardware="$(arg use_mock_hardware)"
