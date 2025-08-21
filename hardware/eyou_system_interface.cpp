@@ -139,7 +139,7 @@ hardware_interface::CallbackReturn EyouSystemInterface::on_activate(const rclcpp
                 return hardware_interface::CallbackReturn::ERROR;
             }
             // Configure TPDO1 for feedback every 20ms
-            if (!motor_nodes_[i]->startAutoFeedback(0, 255, 10) {
+            if (!motor_nodes_[i]->startAutoFeedback(0, 255, 10)) {
                 RCLCPP_ERROR(rclcpp::get_logger("EyouSystemInterface"), "Failed to start auto feedback for joint %s", info_.joints[i].name.c_str());
                 return hardware_interface::CallbackReturn::ERROR;
             }
