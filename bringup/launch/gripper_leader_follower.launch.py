@@ -15,7 +15,7 @@ def generate_launch_description():
         ),
         launch_arguments={
             'namespace': 'supre_robot_leader',
-            'urdf_file_name': 'leader_supre_robot.urdf.xacro',
+            'urdf_file_name': 'gripper_leader_supre_robot.urdf.xacro',
             'controllers_file_name': 'gripper_leader_robot_controllers.yaml',
             'robot_prefix': 'leader_',
             'can_device_index': '0',

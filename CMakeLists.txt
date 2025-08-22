@@ -29,9 +29,16 @@ add_library(
   SHARED
   hardware/eyou_system_interface.cpp
   hardware/misumi_gripper_hardware.cpp
+  hardware/jodell_gripper_hardware.cpp
 )
 find_library(MISUMI_GRIPPER_LIBRARY
  NAMES misumi_gripper_lib
+ PATHS "${PROJECT_SOURCE_DIR}/third_party/lib"
+ REQUIRED
+)
+
+find_library(JODELL_GRIPPER_LIBRARY
+ NAMES jodell_gripper_lib
  PATHS "${PROJECT_SOURCE_DIR}/third_party/lib"
  REQUIRED
 )
@@ -62,6 +69,7 @@ ament_target_dependencies(supre_robot_control
 
 target_link_libraries(supre_robot_control PUBLIC
   ${MISUMI_GRIPPER_LIBRARY} 
+  ${JODELL_GRIPPER_LIBRARY}
   ${EUMOTOR_LIBRARY}
   ${MODBUS_LIBRARIES} 
 )

@@ -54,7 +54,14 @@
             <state_interface name="position"/>
             <state_interface name="velocity"/>
         </joint>
-        
+        <joint name="${prefix}left_arm_joint_7">
+            <param name="node_id">27</param>
+            <param name="start_enabled">false</param>
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>        
+
         <!-- Right Arm Joints -->
         <joint name="${prefix}right_arm_joint_1">
             <param name="node_id">12</param>
@@ -97,14 +104,7 @@
             <command_interface name="position"/>
             <state_interface name="position"/>
             <state_interface name="velocity"/>
-        </joint>
-        <joint name="${prefix}right_arm_joint_7">
-            <param name="node_id">17</param>
-            <param name="start_enabled">false</param>
-            <command_interface name="position"/>
-            <state_interface name="position"/>
-            <state_interface name="velocity"/>
-        </joint>        
+        </joint>  
     </ros2_control>
 
   </xacro:macro>
