@@ -3,9 +3,16 @@
          type="supre_robot_control::MisumiGripperHardware"
          base_class_type="hardware_interface::SystemInterface">
     <description>
-      The ros2_control gripper example using a system hardware interface-type.
+      The ros2_control misumi gripper example using a system hardware interface-type.
     </description>
   </class>
+  <class name="supre_robot_control/JodellGripperHardware"
+         type="supre_robot_control::JodellGripperHardware"
+         base_class_type="hardware_interface::SystemInterface">
+    <description>
+      The ros2_control jodell gripper example using a system hardware interface-type.
+    </description>
+  </class>  
   <class name="supre_robot_control/EyouSystemInterface"
          type="supre_robot_control::EyouSystemInterface"
          base_class_type="hardware_interface::SystemInterface">
