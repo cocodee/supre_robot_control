@@ -79,7 +79,7 @@ hardware_interface::CallbackReturn JodellGripperHardware::on_configure(const rcl
   RCLCPP_INFO(rclcpp::get_logger("JodellGripperHardware"), "Connecting to bus on device '%s'...", device_.c_str());
   gripper_bus_ = std::make_unique<GripperBus>(device_, baud_rate_);
   if (!gripper_bus_->connect()) {
-    RCLCPP_ERROR(rclcpp::get_logger("JodellGripperHardware"), "Failed to connect to gripper bus: %s", gripper_bus_->getLastError().c_str());
+    RCLCPP_ERROR(rclcpp::get_logger("JodellGripperHardware"), "Failed to connect to gripper bus: %s", "");
     return hardware_interface::CallbackReturn::ERROR;
   }
   RCLCPP_INFO(rclcpp::get_logger("JodellGripperHardware"), "Bus connected successfully.");
@@ -138,7 +138,7 @@ hardware_interface::CallbackReturn JodellGripperHardware::on_deactivate(const rc
   for (size_t i = 0; i < gripper_clients_.size(); ++i) {
     if (!gripper_clients_[i]->disable()) {
       RCLCPP_WARN(rclcpp::get_logger("JodellGripperHardware"), "Failed to disable gripper with slave_id %d: %s",
-                  slave_ids_[i], "".c_str());
+                  slave_ids_[i], "");
     }
   }
   return hardware_interface::CallbackReturn::SUCCESS;
