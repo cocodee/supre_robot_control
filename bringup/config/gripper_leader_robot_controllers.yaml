@@ -19,6 +19,7 @@
       - leader_left_arm_joint_4
       - leader_left_arm_joint_5
       - leader_left_arm_joint_6
+      - leader_left_arm_joint_7
     interface_name: "position"
 
 # Parameters for the right arm controller
