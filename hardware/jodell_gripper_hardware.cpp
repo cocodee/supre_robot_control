@@ -193,8 +193,8 @@ hardware_interface::return_type JodellGripperHardware::write(const rclcpp::Time 
          RCLCPP_WARN(rclcpp::get_logger("JodellGripperHardware"), "Failed to move gripper for slave_id %d: %s",
                      slave_ids_[i], "");
       } else {
-         RCLCPP_INFO(rclcpp::get_logger("JodellGripperHardware"), "Moved gripper for slave_id %d: %s",
-                     slave_ids_[i], "");
+         RCLCPP_INFO(rclcpp::get_logger("JodellGripperHardware"), "Moved gripper for slave_id %d: position %f",
+                     slave_ids_[i], hw_commands_[i]);
       }
       
       // 重置该关节的命令
