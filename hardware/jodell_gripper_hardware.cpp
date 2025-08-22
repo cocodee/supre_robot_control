@@ -5,6 +5,21 @@
 namespace supre_robot_control
 {
 
+uint8_t convertToGripperPosition(double position) {
+  return static_cast<uint8_t>(position * 255.0);
+}
+
+double convertFromGripperPosition(uint8_t position) {
+  return static_cast<double>(position) / 255.0;
+}
+
+uint8_t convertToGripperPercentage(int percentage) {
+  return static_cast<uint8_t>(percentage * 255/100);
+}
+
+int convertFromGripperPercentage(uint8_t percentage) {
+  return static_cast<int>(percentage * 100/255);
+}
 hardware_interface::CallbackReturn JodellGripperHardware::on_init(const hardware_interface::HardwareInfo & info)
 {
   if (hardware_interface::SystemInterface::on_init(info) != hardware_interface::CallbackReturn::SUCCESS)
@@ -101,7 +116,7 @@ hardware_interface::CallbackReturn JodellGripperHardware::on_activate(const rclc
   for (size_t i = 0; i < gripper_clients_.size(); ++i) {
   if (!gripper_clients_[i]->enable()) {
       RCLCPP_ERROR(rclcpp::get_logger("JodellGripperHardware"), "Failed to enable gripper with slave_id %d: %s",
-                   slave_ids_[i], gripper_clients_[i]->getLastError().c_str());
+                   slave_ids_[i], "");
       return hardware_interface::CallbackReturn::ERROR;
     }
     RCLCPP_INFO(rclcpp::get_logger("JodellGripperHardware"), "Gripper with slave_id %d enabled.", slave_ids_[i]);
@@ -123,7 +138,7 @@ hardware_interface::CallbackReturn JodellGripperHardware::on_deactivate(const rc
   for (size_t i = 0; i < gripper_clients_.size(); ++i) {
     if (!gripper_clients_[i]->disable()) {
       RCLCPP_WARN(rclcpp::get_logger("JodellGripperHardware"), "Failed to disable gripper with slave_id %d: %s",
-                  slave_ids_[i], gripper_clients_[i]->getLastError().c_str());
+                  slave_ids_[i], "".c_str());
     }
   }
   return hardware_interface::CallbackReturn::SUCCESS;
@@ -159,27 +174,13 @@ hardware_interface::return_type JodellGripperHardware::read(const rclcpp::Time &
       hw_states_velocity_[i] = 0.0; // 速度百分比不是物理速度，设为0或估算
     } else {
       RCLCPP_WARN(rclcpp::get_logger("JodellGripperHardware"), "Failed to read status from slave_id %d: %s",
-                  slave_ids_[i], gripper_clients_[i]->getLastError().c_str());
+                  slave_ids_[i], "");
     }
   }
   // --- MODIFICATION END ---
   return hardware_interface::return_type::OK;
 }
-uint8_t convertToGripperPosition(double position) {
-  return static_cast<uint8_t>(position * 255.0);
-}
 
-double convertFromGripperPosition(uint8_t position) {
-  return static_cast<double>(position) / 255.0;
-}
-
-uint8_t convertToGripperPercentage(int percentage) {
-  return static_cast<uint8_t>(percentage * 255/100);
-}
-
-int convertFromGripperPercentage(uint8_t percentage) {
-  return static_cast<int>(percentage * 100/255);
-}
 hardware_interface::return_type JodellGripperHardware::write(const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/)
 {
   // 遍历每个关节的命令，并发送到对应的客户端
