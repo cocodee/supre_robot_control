@@ -29,7 +29,7 @@ def generate_launch_description():
         ),
         launch_arguments={
             'namespace': 'supre_robot_follower',
-            'urdf_file_name': 'follower_supre_robot.urdf.xacro',
+            'urdf_file_name': 'gripper_follower_supre_robot.urdf.xacro',
             'controllers_file_name': 'gripper_follower_robot_controllers.yaml',
             'robot_prefix': 'follower_',
             'can_device_index': '1',
