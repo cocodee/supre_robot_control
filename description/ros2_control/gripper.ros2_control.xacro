@@ -18,7 +18,9 @@
                 <param name="min">0</param>
                 <param name="max">${param_max_stroke}</param>
             </command_interface>
+            <command_interface name="position"/>
             <state_interface name="position"/>
+            <state_interface name="velocity"/>
             <param name="slave_id">27</param> 
         </joint>            
     </ros2_control>
