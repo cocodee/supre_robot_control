@@ -149,7 +149,7 @@ def generate_launch_description():
     right_arm_trajectory_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["right_arm_trajectory_controller", "--controller-manager", controller_manager_name，"--inactive"],
+        arguments=["right_arm_trajectory_controller", "--controller-manager", controller_manager_name,"--inactive"],
         namespace=namespace,
     )
     # Spawner for the main gripper controller
