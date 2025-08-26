@@ -17,7 +17,7 @@
             <command_interface name="position"/>
             <state_interface name="position"/>
             <state_interface name="velocity"/>
-            <param name="slave_id">17</param> 
+            <param name="slave_id">27</param> 
         </joint>            
     </ros2_control>
 </xacro:macro>
