@@ -42,7 +42,7 @@ private:
     std::vector<double> hw_commands_positions_;
     std::vector<double> hw_states_positions_;
     std::vector<double> hw_states_velocities_;
-
+    
     // Parameters from URDF
     int can_device_index_;
     long long can_baud_rate_;
