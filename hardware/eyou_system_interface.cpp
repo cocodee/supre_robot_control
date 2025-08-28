@@ -212,7 +212,7 @@ hardware_interface::return_type EyouSystemInterface::write(const rclcpp::Time & 
             RCLCPP_INFO(rclcpp::get_logger("EyouSystemInterface"), "send motor position %f, node_id:%d, result:%d",hw_commands_positions_[i],motor_nodes_[i]->getNodeId(),result);
             any_motor_enabled = true;
             if(i%6==0){
-                std::this_thread::sleep_for(std::chrono::milliseconds(10)))
+                std::this_thread::sleep_for(std::chrono::milliseconds(10));
             }
             //auto error_code = motor_nodes_[i]->getErrorCode();
             //RCLCPP_INFO(rclcpp::get_logger("EyouSystemInterface"), "motor error code:%d",error_code);
