@@ -25,7 +25,7 @@ def generate_launch_description():
 
     follower_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            PathJoinSubstitution([pkg_share, 'launch', 'common_robot_control.launch.py'])
+            PathJoinSubstitution([pkg_share, 'launch', 'gripper_follower_robot_control.launch.py'])
         ),
         launch_arguments={
             'namespace': 'supre_robot_follower',
