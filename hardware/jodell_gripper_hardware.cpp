@@ -183,7 +183,7 @@ hardware_interface::return_type JodellGripperHardware::read(const rclcpp::Time &
 
 hardware_interface::return_type JodellGripperHardware::write(const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/)
 {
-  RCLCPP_INFO(rclcpp::get_logger("JodellGripperHardware"), "Moved gripper for slave_id %d",slave_ids_[i]);
+  RCLCPP_INFO(rclcpp::get_logger("JodellGripperHardware"), "Moved gripper ...");
   // 遍历每个关节的命令，并发送到对应的客户端
   for (size_t i = 0; i < gripper_clients_.size(); ++i) {
     if (!std::isnan(hw_commands_[i])) {
