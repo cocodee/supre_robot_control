@@ -32,4 +32,5 @@
       - leader_right_arm_joint_4
       - leader_right_arm_joint_5
       - leader_right_arm_joint_6
+      - leader_right_arm_joint_7      
     interface_name: "position"

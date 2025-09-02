@@ -36,6 +36,7 @@
       - follower_right_arm_joint_4
       - follower_right_arm_joint_5
       - follower_right_arm_joint_6
+      - follower_right_arm_joint_7      
     interface_name: "position"
 
 /supre_robot_follower/left_arm_trajectory_controller:
@@ -63,7 +64,7 @@
       - follower_right_arm_joint_4
       - follower_right_arm_joint_5
       - follower_right_arm_joint_6
-#      - follower_left_arm_joint_7 
+      - follower_right_arm_joint_7 
     command_interfaces: # <--- 硬件是否提供了这些接口？
         - position
     state_interfaces:

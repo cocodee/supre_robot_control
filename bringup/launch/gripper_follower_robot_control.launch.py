@@ -74,6 +74,8 @@ def generate_launch_description():
     robot_prefix = LaunchConfiguration("robot_prefix")
     param_can_device_index = LaunchConfiguration("can_device_index")
     param_device = LaunchConfiguration("serial_device")
+    param_device_left = LaunchConfiguration("serial_device_left")
+    param_device_right = LaunchConfiguration("serial_device_right")
     controllers_file_name = LaunchConfiguration("controllers_file_name")
 
     urdf_file_path = PathJoinSubstitution(
@@ -87,6 +89,8 @@ def generate_launch_description():
          ' prefix:=', robot_prefix,
          ' param_can_device_index:=', param_can_device_index,
          ' param_device:=',param_device,
+         ' param_device_left:=', param_device_left,
+         ' param_device_right:=', param_device_right,
          ])
     robot_description = {"robot_description": robot_description_content}
 

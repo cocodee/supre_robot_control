@@ -6,6 +6,8 @@
   <xacro:arg name="param_can_device_index" default="1" />
   <xacro:arg name="param_can_baud_rate" default="1000" />
   <xacro:arg name="param_device" default="/dev/ttyTHS1" />
+  <xacro:arg name="param_device_left" default="/dev/ttyTHS1" />
+  <xacro:arg name="param_device_right" default="/dev/ttyTHS2" />
   <xacro:arg name="param_baud_rate" default="115200" />
   <xacro:arg name="param_max_stroke" default="0.04" />
 
@@ -14,7 +16,8 @@
   <xacro:include filename="$(find supre_robot_control)/ros2_control/gripper_follower_joints.ros2_control.xacro" />
 
   <!-- Import gripper description -->
-  <xacro:include filename="$(find supre_robot_control)/ros2_control/gripper.ros2_control.xacro" />
+  <xacro:include filename="$(find supre_robot_control)/ros2_control/gripper_left.ros2_control.xacro" />
+  <xacro:include filename="$(find supre_robot_control)/ros2_control/gripper_right.ros2_control.xacro" />
 
   <link name="world"/>
 
@@ -22,12 +25,19 @@
   </xacro:create_robot>
 
 
-  <xacro:gripper_system
-    name="FollowerMisumiGripper" prefix="$(arg prefix)"
+  <xacro:gripper_system_left
+    name="FollowerMisumiGripperLeft" prefix="$(arg prefix)"
     use_mock_hardware="$(arg use_mock_hardware)"
-    param_device="$(arg param_device)"
+    param_device="$(arg param_device_left)"
     param_baud_rate="$(arg param_baud_rate)"
     param_max_stroke="$(arg param_max_stroke)" />
+
+  <xacro:gripper_system_right
+    name="FollowerMisumiGripperRight" prefix="$(arg prefix)"
+    use_mock_hardware="$(arg use_mock_hardware)"
+    param_device="$(arg param_device_right)"
+    param_baud_rate="$(arg param_baud_rate)"
+    param_max_stroke="$(arg param_max_stroke)"/>
 
   <xacro:joints_system
     name="FollowerEyouSystem" prefix="$(arg prefix)"

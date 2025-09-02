@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+<xacro:macro name="gripper_system_right" params="name prefix use_mock_hardware:=^|true param_device:=/dev/ttyTHS1  param_baud_rate:=115200 param_max_stroke:=0.04">
+    <ros2_control name="${name}" type="system">
+        <hardware>
+          <plugin>supre_robot_control/JodellGripperHardware</plugin>
+          <param name="device">${param_device}</param>
+          <param name="baud_rate">${param_baud_rate}</param>
+          <param name="default_speed_percent">100</param>
+          <param name="default_torque_percent">100</param>
+        </hardware>
+      
+        <!-- Define the single joint for the gripper -->
+        <!-- The max_stroke should match your gripper's physical maximum opening in meters -->
+
+        <joint name="${prefix}right_arm_joint_7">
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+            <param name="slave_id">17</param> 
+        </joint>            
+    </ros2_control>
+</xacro:macro>
+</robot>

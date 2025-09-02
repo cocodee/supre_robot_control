@@ -34,6 +34,8 @@ def generate_launch_description():
             'robot_prefix': 'follower_',
             'can_device_index': '1',
             'serial_device': '/dev/ttyTHS2',
+            'serial_device_left': '/dev/ttyTHS1',
+            'serial_device_right': '/dev/ttyTHS2',
         }.items()
     )
 
