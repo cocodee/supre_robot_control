@@ -225,7 +225,7 @@ hardware_interface::return_type JodellGripperHardware::write(const rclcpp::Time 
   {
       // 打印过去一秒内记录到的最大耗时
       RCLCPP_INFO(
-          rclcpp::get_logger("EyouSystemInterface"),
+          rclcpp::get_logger("JodellGripperHardware"),
           "Max write() duration in last second: %ld us",
           max_write_duration_us_
       );

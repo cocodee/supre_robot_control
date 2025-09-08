@@ -216,8 +216,12 @@ hardware_interface::return_type EyouSystemInterface::write(const rclcpp::Time & 
             int result = motor_nodes_[i]->sendCspTargetPosition(hw_commands_positions_[i], 0, true);
             //RCLCPP_INFO(rclcpp::get_logger("EyouSystemInterface"), "send motor position %f, node_id:%d, result:%d",hw_commands_positions_[i],motor_nodes_[i]->getNodeId(),result);
             any_motor_enabled = true;
-            if(i%6==0){
-                std::this_thread::sleep_for(std::chrono::milliseconds(10));
+            //if(i%6==0){
+            //    std::this_thread::sleep_for(std::chrono::milliseconds(10));
+           // }
+           if (result != 0) {
+                RCLCPP_ERROR(rclcpp::get_logger("EyouSystemInterface"), "Failed to send motor position for joint %s", info_.joints[i].name.c_str());
+               // return hardware_interface::return_type::ERROR;
             }
             //auto error_code = motor_nodes_[i]->getErrorCode();
             //RCLCPP_INFO(rclcpp::get_logger("EyouSystemInterface"), "motor error code:%d",error_code);
@@ -235,7 +239,7 @@ hardware_interface::return_type EyouSystemInterface::write(const rclcpp::Time & 
             }
         }
     }
-    
+
     // 2. 记录结束时间并计算耗时（单位：微秒）
     auto end_time = std::chrono::high_resolution_clock::now();
     auto current_duration_us = std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time).count();
