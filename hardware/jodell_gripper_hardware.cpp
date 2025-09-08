@@ -69,6 +69,9 @@ hardware_interface::CallbackReturn JodellGripperHardware::on_init(const hardware
     }
   }
 
+     // --- 初始化日志时间戳 ---
+    last_log_time_ = std::chrono::steady_clock::now(); 
+
   return hardware_interface::CallbackReturn::SUCCESS;
 }
 
@@ -185,6 +188,10 @@ hardware_interface::return_type JodellGripperHardware::write(const rclcpp::Time 
 {
   //RCLCPP_INFO(rclcpp::get_logger("JodellGripperHardware"), "Moved gripper ...");
   // 遍历每个关节的命令，并发送到对应的客户端
+
+  // 1. 记录 write 方法开始的时间
+  auto start_time = std::chrono::high_resolution_clock::now();
+
   for (size_t i = 0; i < gripper_clients_.size(); ++i) {
     if (!std::isnan(hw_commands_[i])) {
       uint8_t position = convertToGripperPosition(hw_commands_[i]);
@@ -194,14 +201,39 @@ hardware_interface::return_type JodellGripperHardware::write(const rclcpp::Time 
          RCLCPP_WARN(rclcpp::get_logger("JodellGripperHardware"), "Failed to move gripper for slave_id %d: %s",
                      slave_ids_[i], "");
       } else {
-         RCLCPP_INFO(rclcpp::get_logger("JodellGripperHardware"), "Moved gripper for slave_id %d: position %f",
-                     slave_ids_[i], hw_commands_[i]);
+         //RCLCPP_INFO(rclcpp::get_logger("JodellGripperHardware"), "Moved gripper for slave_id %d: position %f",
+         //           slave_ids_[i], hw_commands_[i]);
       }
       
       // 重置该关节的命令
       hw_commands_[i] = std::numeric_limits<double>::quiet_NaN();
     }
   }
+
+    // 2. 记录结束时间并计算耗时（单位：微秒）
+  auto end_time = std::chrono::high_resolution_clock::now();
+  auto current_duration_us = std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time).count();
+
+  // 3. 更新时间周期内的最大耗时
+  if (current_duration_us > max_write_duration_us_) {
+      max_write_duration_us_ = current_duration_us;
+  }
+
+  // 4. 限制日志频率：大约每秒打印一次
+  auto now = std::chrono::steady_clock::now();
+  if (std::chrono::duration_cast<std::chrono::seconds>(now - last_log_time_).count() >= 1)
+  {
+      // 打印过去一秒内记录到的最大耗时
+      RCLCPP_INFO(
+          rclcpp::get_logger("EyouSystemInterface"),
+          "Max write() duration in last second: %ld us",
+          max_write_duration_us_
+      );
+      
+      // 重置最大耗时记录和时间戳，为下一个周期做准备
+      max_write_duration_us_ = 0;
+      last_log_time_ = now;
+  }  
   return hardware_interface::return_type::OK;
 }
 

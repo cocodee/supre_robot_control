@@ -29,6 +29,8 @@ hardware_interface::CallbackReturn EyouSystemInterface::on_init(const hardware_i
         return hardware_interface::CallbackReturn::ERROR;
     }
 
+    // --- 初始化日志时间戳 ---
+    last_log_time_ = std::chrono::steady_clock::now();
     RCLCPP_INFO(rclcpp::get_logger("EyouSystemInterface"), "Initializing...");
 
     // Get hardware parameters from URDF
@@ -204,12 +206,15 @@ hardware_interface::return_type EyouSystemInterface::read(const rclcpp::Time & /
 
 hardware_interface::return_type EyouSystemInterface::write(const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/)
 {
+    // 1. 记录 write 方法开始的时间
+    auto start_time = std::chrono::high_resolution_clock::now();
+
     bool any_motor_enabled = false;
     for (size_t i = 0; i < motor_nodes_.size(); ++i) {
         if (hw_start_enabled_[i]) {
             // The sendCspTargetPosition function does not send the SYNC message itself.
             int result = motor_nodes_[i]->sendCspTargetPosition(hw_commands_positions_[i], 0, true);
-            RCLCPP_INFO(rclcpp::get_logger("EyouSystemInterface"), "send motor position %f, node_id:%d, result:%d",hw_commands_positions_[i],motor_nodes_[i]->getNodeId(),result);
+            //RCLCPP_INFO(rclcpp::get_logger("EyouSystemInterface"), "send motor position %f, node_id:%d, result:%d",hw_commands_positions_[i],motor_nodes_[i]->getNodeId(),result);
             any_motor_enabled = true;
             if(i%6==0){
                 std::this_thread::sleep_for(std::chrono::milliseconds(10));
@@ -230,6 +235,32 @@ hardware_interface::return_type EyouSystemInterface::write(const rclcpp::Time & 
             }
         }
     }
+    
+    // 2. 记录结束时间并计算耗时（单位：微秒）
+    auto end_time = std::chrono::high_resolution_clock::now();
+    auto current_duration_us = std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time).count();
+
+    // 3. 更新时间周期内的最大耗时
+    if (current_duration_us > max_write_duration_us_) {
+        max_write_duration_us_ = current_duration_us;
+    }
+
+    // 4. 限制日志频率：大约每秒打印一次
+    auto now = std::chrono::steady_clock::now();
+    if (std::chrono::duration_cast<std::chrono::seconds>(now - last_log_time_).count() >= 1)
+    {
+        // 打印过去一秒内记录到的最大耗时
+        RCLCPP_INFO(
+            rclcpp::get_logger("EyouSystemInterface"),
+            "Max write() duration in last second: %ld us",
+            max_write_duration_us_
+        );
+        
+        // 重置最大耗时记录和时间戳，为下一个周期做准备
+        max_write_duration_us_ = 0;
+        last_log_time_ = now;
+    }
+
 
     return hardware_interface::return_type::OK;
 }

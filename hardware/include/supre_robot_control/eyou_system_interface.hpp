@@ -47,6 +47,10 @@ private:
     int can_device_index_;
     long long can_baud_rate_;
     std::vector<bool> hw_start_enabled_;
+
+    // --- 用于日志频率控制的成员 ---
+    std::chrono::steady_clock::time_point last_log_time_;
+    long max_write_duration_us_ = 0;
 };
 
 }  // namespace eyou_robot_control

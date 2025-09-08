@@ -60,6 +60,11 @@ private:
   int baud_rate_;
   int default_speed_percent_;
   int default_torque_percent_;
+
+  // --- 用于日志频率控制的成员 ---
+  std::chrono::steady_clock::time_point last_log_time_;
+  long max_write_duration_us_ = 0;
+
 };
 
 }  // namespace jodell_gripper_hardware
