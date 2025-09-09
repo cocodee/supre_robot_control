@@ -216,9 +216,9 @@ hardware_interface::return_type EyouSystemInterface::write(const rclcpp::Time & 
             int result = motor_nodes_[i]->sendCspTargetPosition(hw_commands_positions_[i], 0, false);
             //RCLCPP_INFO(rclcpp::get_logger("EyouSystemInterface"), "send motor position %f, node_id:%d, result:%d",hw_commands_positions_[i],motor_nodes_[i]->getNodeId(),result);
             any_motor_enabled = true;
-            //if(i%6==0){
-            //    std::this_thread::sleep_for(std::chrono::milliseconds(10));
-            //}
+            if(i%6==0){
+                std::this_thread::sleep_for(std::chrono::milliseconds(1));
+            }
             if (result != 0) {
                 RCLCPP_ERROR(rclcpp::get_logger("EyouSystemInterface"), "Failed to send motor position for joint %s", info_.joints[i].name.c_str());
                // return hardware_interface::return_type::ERROR;
