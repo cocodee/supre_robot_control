@@ -210,7 +210,7 @@ hardware_interface::return_type EyouSystemInterface::write(const rclcpp::Time & 
     auto start_time = std::chrono::high_resolution_clock::now();
 
     bool any_motor_enabled = false;
-    RCLCPP_INFO(rclcpp::get_logger("EyouSystemInterface"), "write start...,motor_nodes_size:%zu",motor_nodes_.size());
+   // RCLCPP_INFO(rclcpp::get_logger("EyouSystemInterface"), "write start...,motor_nodes_size:%zu",motor_nodes_.size());
     for (size_t i = 0; i < motor_nodes_.size(); ++i) {
         if (hw_start_enabled_[i]) {
             // The sendCspTargetPosition function does not send the SYNC message itself.
@@ -221,7 +221,7 @@ hardware_interface::return_type EyouSystemInterface::write(const rclcpp::Time & 
                 std::this_thread::sleep_for(std::chrono::milliseconds(1));
             }
             if (result != 0) {
-                RCLCPP_ERROR(rclcpp::get_logger("EyouSystemInterface"), "Failed to send motor position for joint %s", info_.joints[i].name.c_str());
+                RCLCPP_ERROR(rclcpp::get_logger("EyouSystemInterface"), "Failed to send motor position for joint %s,motor_nodes_size: %zu", info_.joints[i].name.c_str(),motor_nodes_.size());
                // return hardware_interface::return_type::ERROR;
             }
             //auto error_code = motor_nodes_[i]->getErrorCode();
