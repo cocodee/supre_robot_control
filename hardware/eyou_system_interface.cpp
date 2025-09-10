@@ -210,7 +210,7 @@ hardware_interface::return_type EyouSystemInterface::write(const rclcpp::Time & 
     auto start_time = std::chrono::high_resolution_clock::now();
 
     bool any_motor_enabled = false;
-    RCLCPP_INFO(rclcpp::get_logger("EyouSystemInterface"), "write start...,motor_nodes_size:%d",motor_nodes_.size());
+    RCLCPP_INFO(rclcpp::get_logger("EyouSystemInterface"), "write start...,motor_nodes_size:%zu",motor_nodes_.size());
     for (size_t i = 0; i < motor_nodes_.size(); ++i) {
         if (hw_start_enabled_[i]) {
             // The sendCspTargetPosition function does not send the SYNC message itself.
