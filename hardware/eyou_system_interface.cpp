@@ -136,12 +136,12 @@ hardware_interface::CallbackReturn EyouSystemInterface::on_activate(const rclcpp
                 RCLCPP_ERROR(rclcpp::get_logger("EyouSystemInterface"), "Failed to clear fault for joint %s", info_.joints[i].name.c_str());
                 return hardware_interface::CallbackReturn::ERROR;
             }
-            if (!motor_nodes_[i]->configureCspMode()) {
+            if (!motor_nodes_[i]->configureCspMode(0,false)) {
                 RCLCPP_ERROR(rclcpp::get_logger("EyouSystemInterface"), "Failed to configure CSP mode for joint %s", info_.joints[i].name.c_str());
                 return hardware_interface::CallbackReturn::ERROR;
             }
             // Configure TPDO1 for feedback every 20ms
-            if (!motor_nodes_[i]->startAutoFeedback(0, 255, 10)) {
+            if (!motor_nodes_[i]->startAutoFeedback(0, 255, 20)) {
                 RCLCPP_ERROR(rclcpp::get_logger("EyouSystemInterface"), "Failed to start auto feedback for joint %s", info_.joints[i].name.c_str());
                 return hardware_interface::CallbackReturn::ERROR;
             }
@@ -158,7 +158,7 @@ hardware_interface::CallbackReturn EyouSystemInterface::on_activate(const rclcpp
                 return hardware_interface::CallbackReturn::ERROR;
             }            
             // Configure TPDO1 for feedback every 10ms
-            if (!motor_nodes_[i]->startAutoFeedback(0, 255, 10)) {
+            if (!motor_nodes_[i]->startAutoFeedback(0, 255, 20)) {
                 RCLCPP_ERROR(rclcpp::get_logger("EyouSystemInterface"), "Failed to start auto feedback for joint %s", info_.joints[i].name.c_str());
                 return hardware_interface::CallbackReturn::ERROR;
             }
@@ -230,6 +230,7 @@ hardware_interface::return_type EyouSystemInterface::write(const rclcpp::Time & 
 
     // After sending all position targets, send a single SYNC message
     // to make all motors execute their received command simultaneously.
+    /*
     if (any_motor_enabled) {
         // Find the first enabled motor to send the SYNC command
         for (size_t i = 0; i < motor_nodes_.size(); ++i) {
@@ -239,7 +240,7 @@ hardware_interface::return_type EyouSystemInterface::write(const rclcpp::Time & 
             }
         }
     }
-
+    */
     // 2. 记录结束时间并计算耗时（单位：微秒）
     auto end_time = std::chrono::high_resolution_clock::now();
     auto current_duration_us = std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time).count();
