@@ -11,7 +11,7 @@ def generate_launch_description():
    # --- Leader Launch ---
     leader_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            PathJoinSubstitution([pkg_share, 'launch', 'common_robot_control.launch.py'])
+            PathJoinSubstitution([pkg_share, 'launch', 'gripper_leader_robot_control.launch.py'])
         ),
         launch_arguments={
             'namespace': 'supre_robot_leader',
